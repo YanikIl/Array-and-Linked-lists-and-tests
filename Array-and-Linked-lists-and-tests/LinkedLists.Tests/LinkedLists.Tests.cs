@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace LinkedLists.Tests
 {
-    public class Tests
+    public class LinkedListsTests
     {
         [SetUp]
         public void Setup()

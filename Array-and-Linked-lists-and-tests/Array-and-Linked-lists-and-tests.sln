@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayLists.Tests", "ArrayLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedLists.Tests", "LinkedLists.Tests\LinkedLists.Tests.csproj", "{31661D77-9779-4354-A437-C9F7C1343DFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForReview", "ForReview\ForReview.csproj", "{7DD5D6D0-A5FF-481D-B4F3-B3D5EE8EFA9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{31661D77-9779-4354-A437-C9F7C1343DFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31661D77-9779-4354-A437-C9F7C1343DFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31661D77-9779-4354-A437-C9F7C1343DFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD5D6D0-A5FF-481D-B4F3-B3D5EE8EFA9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD5D6D0-A5FF-481D-B4F3-B3D5EE8EFA9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD5D6D0-A5FF-481D-B4F3-B3D5EE8EFA9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD5D6D0-A5FF-481D-B4F3-B3D5EE8EFA9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

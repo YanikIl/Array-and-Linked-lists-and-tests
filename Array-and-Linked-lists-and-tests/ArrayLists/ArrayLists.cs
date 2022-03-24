@@ -328,13 +328,12 @@
         #endregion
 
         #region 10. вернуть длину (уже есть)
-        public int GetLehgth()
+        public int GetLength()
         {
             return Length;
         }
         #endregion
 
-        // негативные дописать
         #region 11. доступ по индексу 
         public int IndexValue(int index)
         {
@@ -364,7 +363,7 @@
         #endregion
 
         #region 14. реверс (123 -> 321)
-        public void ChangeValueByIndex()
+        public void Reverse()
         {
             int tmp;
             for (int i = 0; i < Length / 2; ++i)
@@ -410,7 +409,7 @@
         }
         #endregion
 
-        #region 17. поиск индекс максимального элемента
+        #region 17. поиск индекса максимального элемента
         public int GetIndexByMax()
         {
             int min = _array[0];
@@ -430,7 +429,7 @@
 
         #endregion
 
-        #region 18. поиск индекс минимального элемента
+        #region 18. поиск индекса минимального элемента
         public int GetIndexByMin()
         {
             int min = _array[0];
@@ -449,33 +448,82 @@
         }
         #endregion
 
-        // 19. сортировка по возрастанию
-        //метод обмена элементов
+        #region 19. сортировка по возрастанию
+        public void BubbleSortAscending()
+        {
+            for (int i = 0; i < _array.Length - 1; i++)
+            {
+                for (int j = i + 1; j < _array.Length; j++)
+                {
+                    int tmp;
+                    if (_array[j] < _array[i])
+                    {
+                        tmp = _array[i];
+                        _array[i] = _array[j];
+                        _array[j] = tmp;
+                    }
+                }
+            }
+        }
+        #endregion
 
-        //static void BubbleSortAscending()
-        //{
-        //    for (int i = 0; i < _array.Length; i++)
-        //    {
-        //        for (int j = i + 1; j < _array.Length; j++)
-        //        {
-        //            int tmp;
-        //            if (_array[j] > _array[i])
-        //            {
-        //                tmp = _array[i];
-        //                _array[i] = _array[j];
-        //                _array[j] = tmp;
-        //            }
-        //        }
-        //    }
-        //}
+        #region 20. сортировка по убыванию descending
+        public void BubbleSortDescending()
+        {
+            for (int i = 0; i < _array.Length - 1; i++)
+            {
+                for (int j = i + 1; j < _array.Length; j++)
+                {
+                    int tmp;
+                    if (_array[j] > _array[i])
+                    {
+                        tmp = _array[i];
+                        _array[i] = _array[j];
+                        _array[j] = tmp;
+                    }
+                }
+            }
+        }
+        #endregion
 
-        // 20. сортировка по убыванию descending
+        // ???
+        #region 21. удаление по значению первого (?вернуть индекс)  
+        public int DeleteByFirstValue(int value)
+        {
+            if (Length < 1)
+            {
+                throw new ArgumentOutOfRangeException("Пустой массив");
+            }
+            if (Length <= _array.Length / 2)
+            {
+                DownArraySize();
+            }
+            int index = 0;
+            for (int i = 0; i < Length; i++)
+            {
+                if (_array[i] == value)
+                {
+                    index = i;
+                    DeleteByIndex(index);
+                    Length--;
+                    return index;
+                }
+            }
+            return -1;
+        }
+        #endregion
 
-        // 21. удаление по значению первого (?вернуть индекс)
-        
-        # region 22. удаление по значению всех
+        #region 22. удаление по значению всех
         public int DeleteAllByValue(int value)
         {
+            if (Length < 1)
+            {
+                throw new ArgumentOutOfRangeException("Пустой массив");
+            }
+            if (Length <= _array.Length / 2)
+            {
+                DownArraySize();
+            }
             int count = 0;
             for (int i = 0; i < Length; i++)
             {
@@ -495,6 +543,7 @@
         #endregion
 
         // 23. 3 конструктора(пустой, на основе одного элемента, на основе массива), есть выше
+
 
         // 24. добавление списка(вашего самодельного) в конец
         // 25. добавление списка в начало
