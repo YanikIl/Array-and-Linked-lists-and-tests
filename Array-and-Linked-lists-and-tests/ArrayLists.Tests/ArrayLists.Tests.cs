@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections;
 using ArrayLists.Tests.ArrayListsTestsSources;
 
@@ -32,10 +33,16 @@ namespace ArrayLists.Tests
         [TestCaseSource(typeof(AddByIndexTestSource))]
         public void AddByIndexTest(int index, int value, ArrayList list, ArrayList expectedList)
         {
-            list.AddByIndex(index, value);
             ArrayList actualList = list;
+            list.AddByIndex(index, value);
 
             Assert.AreEqual(expectedList, actualList);
+        }
+
+        [TestCaseSource(typeof(AddByIndexTestSourceForException))]
+        public void AddByIndexTest_WhenIndexLessZeroOrMoreLength_ShouldThrowIndexOutOfRangeException(int index, int value, ArrayList list)
+        {
+            Assert.Throws<IndexOutOfRangeException>(() => list.AddByIndex(index, value));
         }
         #endregion
 
@@ -48,6 +55,7 @@ namespace ArrayLists.Tests
 
             Assert.AreEqual(expectedList, actualList);
         }
+
         #endregion
 
         #region DeleteFirstTest
@@ -118,88 +126,88 @@ namespace ArrayLists.Tests
 
 
 
-        #region IndexValueTest
-        [TestCaseSource(typeof(IndexValueTestSource))]
-        public void IndexValueTest(int index, ArrayList list)
-        {
-            int value = list.IndexValue(index);
+        //#region IndexValueTest
+        //[TestCaseSource(typeof(IndexValueTestSource))]
+        //public void IndexValueTest(int index, ArrayList list)
+        //{
+        //    int value = list.IndexValue(index);
 
-            Assert.AreEqual(value, expectedValue);
-        }
-        #endregion
+        //    Assert.AreEqual(value, expectedValue);
+        //}
+        //#endregion
 
-        #region GetFirstIndexByValueTest
-        [TestCaseSource(typeof(GetFirstIndexByValueTestSource))]
-        public void GetFirstIndexByValueTest(int value, ArrayList list, int expectedIndex)
-        {
-            int index = list.GetFirstIndexByValue(value);
+        //#region GetFirstIndexByValueTest
+        //[TestCaseSource(typeof(GetFirstIndexByValueTestSource))]
+        //public void GetFirstIndexByValueTest(int value, ArrayList list, int expectedIndex)
+        //{
+        //    int index = list.GetFirstIndexByValue(value);
 
-            Assert.AreEqual(index, expectedIndex);
-        }
-        #endregion
+        //    Assert.AreEqual(index, expectedIndex);
+        //}
+        //#endregion
 
-        #region ChangeValueByIndexTest
-        [TestCaseSource(typeof(ChangeValueByIndexTestSource))]
-        public void ChangeValueByIndexTest(int index, int value, ArrayList list, ArrayList expectedList)
-        {
-            list.ChangeValueByIndex(index, value);
-            ArrayList actualList = list;
+        //#region ChangeValueByIndexTest
+        //[TestCaseSource(typeof(ChangeValueByIndexTestSource))]
+        //public void ChangeValueByIndexTest(int index, int value, ArrayList list, ArrayList expectedList)
+        //{
+        //    list.ChangeValueByIndex(index, value);
+        //    ArrayList actualList = list;
 
-            Assert.AreEqual(expectedList, actualList);
-        }
-        #endregion
+        //    Assert.AreEqual(expectedList, actualList);
+        //}
+        //#endregion
 
-        #region ReverseTest
-        [TestCaseSource(typeof(ReverseTestSource))]
-        public void ReverseTest( ArrayList list, ArrayList expectedList)
-        {
-            list.Reverse();
-            ArrayList actualList = list;
+        //#region ReverseTest
+        //[TestCaseSource(typeof(ReverseTestSource))]
+        //public void ReverseTest( ArrayList list, ArrayList expectedList)
+        //{
+        //    list.Reverse();
+        //    ArrayList actualList = list;
 
-            Assert.AreEqual(expectedList, actualList);
-        }
-        #endregion
+        //    Assert.AreEqual(expectedList, actualList);
+        //}
+        //#endregion
 
-        #region GetMaxTest
-        [TestCaseSource(typeof(GetMaxTestSource))]
-        public void GetMaxTest(ArrayList list, int expectedMax)
-        {
-            int max = list.GetMax();
+        //#region GetMaxTest
+        //[TestCaseSource(typeof(GetMaxTestSource))]
+        //public void GetMaxTest(ArrayList list, int expectedMax)
+        //{
+        //    int max = list.GetMax();
 
-            Assert.AreEqual(expectedMax, max);
-        }
-        #endregion
+        //    Assert.AreEqual(expectedMax, max);
+        //}
+        //#endregion
 
 
-        #region GetMinTest
-        [TestCaseSource(typeof(GetMinTestSource))]
-        public void GetMinTest(ArrayList list, int expectedMin)
-        {
-            int min = list.GetMin();
+        //#region GetMinTest
+        //[TestCaseSource(typeof(GetMinTestSource))]
+        //public void GetMinTest(ArrayList list, int expectedMin)
+        //{
+        //    int min = list.GetMin();
 
-            Assert.AreEqual(expectedMin, min);
-        }
-        #endregion
+        //    Assert.AreEqual(expectedMin, min);
+        //}
+        //#endregion
 
-        #region GetIndexByMaxTest
-        [TestCaseSource(typeof(GetIndexByMaxTestSource))]
-        public void GetIndexByMaxTest(ArrayList list, int expectedIndexMax)
-        {
-            int indexmax = list.GetIndexByMax();
+        //#region GetIndexByMaxTest
+        //[TestCaseSource(typeof(GetIndexByMaxTestSource))]
+        //public void GetIndexByMaxTest(ArrayList list, int expectedIndexMax)
+        //{
+        //    int indexmax = list.GetIndexByMax();
 
-            Assert.AreEqual(expectedIndexMax, indexmax);
-        }
-        #endregion
+        //    Assert.AreEqual(expectedIndexMax, indexmax);
+        //}
+        //#endregion
 
-        #region GetIndexByMinTest
-        [TestCaseSource(typeof(GetIndexByMinTestSource))]
-        public void GetIndexByMinTest(ArrayList list, int expectedIndexMin)
-        {
-            int indexmin = list.GetIndexByMin();
+        //#region GetIndexByMinTest
+        //[TestCaseSource(typeof(GetIndexByMinTestSource))]
+        //public void GetIndexByMinTest(ArrayList list, int expectedIndexMin)
+        //{
+        //    int indexmin = list.GetIndexByMin();
 
-            Assert.AreEqual(expectedIndexMin, indexmin);
-        }
-        #endregion
+        //    Assert.AreEqual(expectedIndexMin, indexmin);
+        //}
+        //#endregion
 
 
 

@@ -193,9 +193,9 @@
         #region 3. добавление значения по индексу
         public void AddByIndex(int index, int value)
         {
-            if (index < 0 || index > Length)
+            if (index < 0 || index >= Length)
             {
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException("Выход за пределы");
             }
             if (Length == _array.Length)
             {
@@ -542,12 +542,54 @@
         }
         #endregion
 
-        // 23. 3 конструктора(пустой, на основе одного элемента, на основе массива), есть выше
+        #region 23. 3 конструктора(пустой, на основе одного элемента, на основе массива), есть выше
+        #endregion
 
+        #region 24. добавление списка(вашего самодельного) в конец
 
-        // 24. добавление списка(вашего самодельного) в конец
-        // 25. добавление списка в начало
-        // 26. добавление списка по индексу
+        public void AddListToEnd(ArrayList list)
+        {
+            if (list is null)
+            {
+                throw new NullReferenceException();
+            }
+
+            for (int i = 0; i < list.Length; i++)
+            {
+                AddToEnd(list[i]);
+            }
+        }
+        #endregion
+
+        #region 25. добавление списка в начало
+        public void AddListToStart(ArrayList list)
+        {
+            if (list is null)
+            {
+                throw new NullReferenceException();
+            }
+
+            for (int i = 0; i < list.Length; i++)
+            {
+                AddToStart(list[i]);
+            }
+        }
+        #endregion
+
+        #region 26. добавление списка по индексу
+        public void AddListByIndex(int index, ArrayList list)
+        {
+            if (list is null)
+            {
+                throw new NullReferenceException();
+            }
+
+            for (int i = 0; i < list.Length; i++)
+            {
+                AddByIndex(index, list[i]);
+            }
+        }
+        #endregion
 
     }
 }

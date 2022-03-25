@@ -31,6 +31,12 @@ namespace ArrayLists.Tests.ArrayListsTestsSources
                 new ArrayList(new int[] { 5}),
                 new ArrayList(new int[] { }),
             };
+
+            yield return new object[]
+            {
+                new ArrayList(new int[] { }),
+                new ArrayList(new int[] { }),
+            };
         }
     }
 
