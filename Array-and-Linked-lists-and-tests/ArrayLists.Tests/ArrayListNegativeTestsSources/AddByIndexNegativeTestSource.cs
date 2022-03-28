@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ArrayLists.Tests.ArrayListsTestsSources
 {
-    public class AddByIndexTestSourceForException : IEnumerable
+    public class AddByIndexNegativeTestSource : IEnumerable
     {
         public IEnumerator GetEnumerator()
         {

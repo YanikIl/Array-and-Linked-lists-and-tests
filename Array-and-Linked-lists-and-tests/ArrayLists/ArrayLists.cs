@@ -216,6 +216,10 @@
         #region 4. удаление из конца одного элемента
         public void DeleteLast()
         {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
             if (Length == _array.Length)
             {
                 UpArraySize();
@@ -230,6 +234,10 @@
         #region 5. удаление из начала одного элемента
         public void DeleteFirst()
         {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
             if (Length == _array.Length)
             {
                 UpArraySize();
@@ -308,7 +316,7 @@
             {
                 throw new ArgumentOutOfRangeException();
             }
-            else if (index < 0 || index >= Length)
+            else if (index < 0)
             {
                 throw new IndexOutOfRangeException();
             }
@@ -334,9 +342,14 @@
         }
         #endregion
 
+        // негативный валится, спросить
         #region 11. доступ по индексу 
         public int IndexValue(int index)
         {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
             return _array[index];
         }
         #endregion
@@ -355,6 +368,7 @@
         }
         #endregion
 
+        //негативные
         #region 13. изменение по индексу
         public void ChangeValueByIndex(int index, int value)
         {
@@ -366,11 +380,11 @@
         public void Reverse()
         {
             int tmp;
-            for (int i = 0; i < Length / 2; ++i)
+            for (int i = 0; i < Length / 2; i++)
             {
                 tmp = _array[i];
-                _array[i] = _array[Length - 1];
-                _array[Length - 1] = tmp;
+                _array[i] = _array[Length - i - 1];
+                _array[Length - i - 1] = tmp;
             }
         }
         #endregion
@@ -378,6 +392,11 @@
         #region 15. поиск значения максимального элемента
         public int GetMax()
         {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+            
             int max = _array[0];
 
             for (int i = 0; i < Length; ++i)
@@ -395,6 +414,11 @@
         #region 16. поиск значения минимального элемента
         public int GetMin()
         {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
             int min = _array[0];
 
             for (int i = 0; i < Length; ++i)
@@ -412,14 +436,19 @@
         #region 17. поиск индекса максимального элемента
         public int GetIndexByMax()
         {
-            int min = _array[0];
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
+            int max = _array[0];
             int index = 0;
 
             for (int i = 0; i < Length; ++i)
             {
-                if (_array[i] < min)
+                if (_array[i] > max)
                 {
-                    min = _array[i];
+                    max = _array[i];
                     index = i;
                 }
             }
@@ -432,6 +461,11 @@
         #region 18. поиск индекса минимального элемента
         public int GetIndexByMin()
         {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
             int min = _array[0];
             int index = 0;
 
@@ -448,6 +482,7 @@
         }
         #endregion
 
+        //не работает, спросить
         #region 19. сортировка по возрастанию
         public void BubbleSortAscending()
         {
@@ -467,6 +502,7 @@
         }
         #endregion
 
+        //не работает
         #region 20. сортировка по убыванию descending
         public void BubbleSortDescending()
         {
@@ -486,13 +522,13 @@
         }
         #endregion
 
-        // ???
+        // не работает
         #region 21. удаление по значению первого (?вернуть индекс)  
         public int DeleteByFirstValue(int value)
         {
-            if (Length < 1)
+            if (Length == 0)
             {
-                throw new ArgumentOutOfRangeException("Пустой массив");
+                throw new Exception("Пустой массив");
             }
             if (Length <= _array.Length / 2)
             {
@@ -516,9 +552,9 @@
         #region 22. удаление по значению всех
         public int DeleteAllByValue(int value)
         {
-            if (Length < 1)
+            if (Length == 0)
             {
-                throw new ArgumentOutOfRangeException("Пустой массив");
+                throw new Exception("Пустой массив");
             }
             if (Length <= _array.Length / 2)
             {
@@ -542,9 +578,11 @@
         }
         #endregion
 
+        //проверить
         #region 23. 3 конструктора(пустой, на основе одного элемента, на основе массива), есть выше
         #endregion
 
+        //проверить
         #region 24. добавление списка(вашего самодельного) в конец
 
         public void AddListToEnd(ArrayList list)
@@ -561,6 +599,7 @@
         }
         #endregion
 
+        //проверить
         #region 25. добавление списка в начало
         public void AddListToStart(ArrayList list)
         {
@@ -576,6 +615,7 @@
         }
         #endregion
 
+        //проверить
         #region 26. добавление списка по индексу
         public void AddListByIndex(int index, ArrayList list)
         {
