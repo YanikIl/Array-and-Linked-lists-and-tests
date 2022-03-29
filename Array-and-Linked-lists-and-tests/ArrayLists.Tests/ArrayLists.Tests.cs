@@ -357,6 +357,12 @@ namespace ArrayLists.Tests
         #endregion
 
         #region AddListToStart
+        [TestCaseSource(typeof(AddListToStartTestSource))]
+        public void AddListToBeginningTest(ArrayList list, ArrayList actualList, ArrayList expectedList)
+        {
+            actualList.AddListToStart(list);
+            Assert.AreEqual(expectedList, actualList);
+        }
         #endregion
 
         #region AddListByIndex

@@ -482,18 +482,16 @@
         }
         #endregion
 
-        //не работает, спросить
         #region 19. сортировка по возрастанию
         public void BubbleSortAscending()
         {
-            for (int i = 0; i < _array.Length - 1; i++)
+            for (int i = 0; i < Length; i++)
             {
-                for (int j = i + 1; j < _array.Length; j++)
+                for (int j = i + 1; j < Length; j++)
                 {
-                    int tmp;
-                    if (_array[j] < _array[i])
+                    if (_array[i] > _array[j])
                     {
-                        tmp = _array[i];
+                        int tmp = _array[i];
                         _array[i] = _array[j];
                         _array[j] = tmp;
                     }
@@ -502,20 +500,18 @@
         }
         #endregion
 
-        //не работает
         #region 20. сортировка по убыванию descending
         public void BubbleSortDescending()
         {
-            for (int i = 0; i < _array.Length - 1; i++)
+            for (int i = 0; i < Length; i++)
             {
-                for (int j = i + 1; j < _array.Length; j++)
+                for (int j = i + 1; j < Length; j++)
                 {
-                    int tmp;
-                    if (_array[j] > _array[i])
+                    if (_array[i] < _array[j])
                     {
-                        tmp = _array[i];
-                        _array[i] = _array[j];
-                        _array[j] = tmp;
+                        int tmp = _array[j];
+                        _array[j] = _array[i];
+                        _array[i] = tmp;
                     }
                 }
             }
@@ -523,29 +519,21 @@
         #endregion
 
         // не работает
-        #region 21. удаление по значению первого (?вернуть индекс)  
+        #region 21. удаление по значению первого (вернуть индекс)  
         public int DeleteByFirstValue(int value)
         {
             if (Length == 0)
             {
-                throw new Exception("Пустой массив");
+                throw new Exception("List is empty");
             }
-            if (Length <= _array.Length / 2)
+            int index = GetFirstIndexByValue(value);
+
+            if (index != -1)
             {
-                DownArraySize();
+                DeleteByIndex(index);
             }
-            int index = 0;
-            for (int i = 0; i < Length; i++)
-            {
-                if (_array[i] == value)
-                {
-                    index = i;
-                    DeleteByIndex(index);
-                    Length--;
-                    return index;
-                }
-            }
-            return -1;
+
+            return index;
         }
         #endregion
 
