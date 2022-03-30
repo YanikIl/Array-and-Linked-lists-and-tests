@@ -7,7 +7,7 @@
         private int[] _array;
         public int Length { get; private set; }
 
-        #region 23. конструкторы
+        #region конструкторы
         public ArrayList()
         {
             Length = 0;

@@ -18,4 +18,9 @@
     <ProjectReference Include="..\LinkedLists\LinkedLists.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LinkedListsNegativeTestsSources\" />
+    <Folder Include="LinkedListsTestsSources\" />
+  </ItemGroup>
+
 </Project>
