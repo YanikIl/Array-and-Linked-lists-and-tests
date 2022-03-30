@@ -183,11 +183,11 @@ namespace ArrayLists.Tests
 
             Assert.AreEqual(value, expectedValue);
         }
-
         [TestCaseSource(typeof(IndexValueNegativeTestSource))]
-        public void IndexValueNegativeTestSource_WhenNIndexLessZeroOrMoreOrEqualsLength_ShouldThrowIndexOutOfRangeException(int index, ArrayList list)
+        public void IndexValueTest_WhenIndexOutOfRangeOfList_ShouldThrowIndexOutOfRangeException(int index, ArrayList list)
         {
-            Assert.Throws<IndexOutOfRangeException>(() => list.IndexValue(index));
+            int a;
+            Assert.Throws<IndexOutOfRangeException>(() => a = list[index]);
         }
 
         [TestCaseSource(typeof(IndexValueNegativeTestSourceForException))]
@@ -215,6 +215,12 @@ namespace ArrayLists.Tests
             ArrayList actualList = list;
 
             Assert.AreEqual(expectedList, actualList);
+        }
+
+        [TestCaseSource(typeof(ChangeValueByIndexNegativeTestSourceForException))]
+        public void ChangeValueByIndexNegativeTest_WhenLengthEqualsZero_ShouldThrowException(int index, int value, ArrayList list, ArrayList expectedList)
+        {
+            Assert.Throws<Exception>(() => list.ChangeValueByIndex(index, value));
         }
         #endregion
 
@@ -350,22 +356,56 @@ namespace ArrayLists.Tests
         }
         #endregion
 
-        #region конструкторы
+        #region AddListToEndTest
+        [TestCaseSource(typeof(AddListToEndTestSource))]
+        public void AddListToEndTest(ArrayList list, ArrayList actualList, ArrayList expectedList)
+        {
+            actualList.AddListToEnd(list);
+            Assert.AreEqual(expectedList, actualList);
+        }
+
+        [TestCaseSource(typeof(AddListToEndNegativeTestSource))]
+        public void AddListToEndNegativeTestSource_WhenListZero_ShouldThrowException(ArrayList list, ArrayList actualList)
+        {
+            Assert.Throws<Exception>(() => actualList.AddListToEnd(list));
+        }
         #endregion
 
-        #region AddListToEnd
-        #endregion
-
-        #region AddListToStart
+        #region AddListToStartTest
         [TestCaseSource(typeof(AddListToStartTestSource))]
-        public void AddListToBeginningTest(ArrayList list, ArrayList actualList, ArrayList expectedList)
+        public void AddListToStartTest(ArrayList list, ArrayList actualList, ArrayList expectedList)
         {
             actualList.AddListToStart(list);
             Assert.AreEqual(expectedList, actualList);
         }
+
+        [TestCaseSource(typeof(AddListToStartNegativeTestSource))]
+        public void AddListToStartNegativeTestSource_WhenListZero_ShouldThrowException(ArrayList list, ArrayList actualList)
+        {
+            Assert.Throws<Exception>(() => actualList.AddListToStart(list));
+        }
+
         #endregion
 
-        #region AddListByIndex
+        #region AddListByIndexTest
+        [TestCaseSource(typeof(AddListByIndexTestSource))]
+        public void AddListByIndexTest(int index, ArrayList list, ArrayList actualList, ArrayList expectedList)
+        {
+            actualList.AddListByIndex(index, list);
+            Assert.AreEqual(expectedList, actualList);
+        }
+
+        [TestCaseSource(typeof(AddListByIndexNegativeTestSource))]
+        public void AddListByIndexNegativeTestSource_WhenListZero_ShouldThrowException(int index, ArrayList list, ArrayList actualList)
+        {
+            Assert.Throws<Exception>(() => actualList.AddListByIndex(index, list));
+        }
+
+        [TestCaseSource(typeof(AddListByIndexNegativeTestSourceForArgumentOutOfRangeException))]
+        public void AddListByIndexNegativeTestSource_WhenIndexLessZeroOrMoreOrEqualsLength_ShouldThrowArgumentOutOfRangeException(int index, ArrayList list, ArrayList actualList)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => actualList.AddListByIndex(index, list));
+        }
         #endregion
     }
 }

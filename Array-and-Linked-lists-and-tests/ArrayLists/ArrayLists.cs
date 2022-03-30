@@ -342,10 +342,10 @@
         }
         #endregion
 
-        // негативный валится, спросить
         #region 11. доступ по индексу 
         public int IndexValue(int index)
         {
+
             if (Length == 0)
             {
                 throw new Exception("List is empty");
@@ -368,10 +368,13 @@
         }
         #endregion
 
-        //негативные
         #region 13. изменение по индексу
         public void ChangeValueByIndex(int index, int value)
         {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
             _array[index] = value;
         }
         #endregion
@@ -518,7 +521,6 @@
         }
         #endregion
 
-        // не работает
         #region 21. удаление по значению первого (вернуть индекс)  
         public int DeleteByFirstValue(int value)
         {
@@ -566,18 +568,13 @@
         }
         #endregion
 
-        //проверить
-        #region 23. 3 конструктора(пустой, на основе одного элемента, на основе массива), есть выше
-        #endregion
-
-        //проверить
-        #region 24. добавление списка(вашего самодельного) в конец
+        #region 23. добавление списка в конец
 
         public void AddListToEnd(ArrayList list)
         {
-            if (list is null)
+            if (list.Length == 0)
             {
-                throw new NullReferenceException();
+                throw new Exception("List is empty");
             }
 
             for (int i = 0; i < list.Length; i++)
@@ -587,35 +584,66 @@
         }
         #endregion
 
-        //проверить
-        #region 25. добавление списка в начало
+        #region 24. добавление списка в начало
         public void AddListToStart(ArrayList list)
         {
-            if (list is null)
+            if (list.Length == 0)
             {
-                throw new NullReferenceException();
+                throw new Exception("List is empty");
             }
+
+            int[] newArray = new int[Length + list.Length];
 
             for (int i = 0; i < list.Length; i++)
             {
-                AddToStart(list[i]);
+                newArray[i] = list[i];
             }
+
+            for (int i = list.Length; i < newArray.Length; i++)
+            {
+                newArray[i] = _array[i - list.Length];
+            }
+
+            Length = newArray.Length;
+            _array = newArray;
+            UpArraySize();
         }
         #endregion
 
-        //проверить
-        #region 26. добавление списка по индексу
+        #region 25. добавление списка по индексу
         public void AddListByIndex(int index, ArrayList list)
         {
-            if (list is null)
+            if (list.Length == 0)
             {
-                throw new NullReferenceException();
+                throw new Exception("List is empty");
+            }
+            if (index < 0 || index >= Length)
+            {
+                throw new ArgumentOutOfRangeException();
             }
 
-            for (int i = 0; i < list.Length; i++)
+            int newLength = Length + list.Length;
+
+            int[] newArray = new int[newLength];
+
+            for (int i = 0; i < index; i++)
             {
-                AddByIndex(index, list[i]);
+                newArray[i] = _array[i];
             }
+
+            for (int i = index; i < index + list.Length; i++)
+            {
+                newArray[i] = list[i - index];
+            }
+
+            for (int i = index + list.Length; i < newArray.Length; i++)
+            {
+                newArray[i] = _array[i - list.Length];
+            }
+
+            Length = newArray.Length;
+            _array = newArray;
+            UpArraySize();
         }
         #endregion
 

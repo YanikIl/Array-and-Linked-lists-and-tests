@@ -1,0 +1,17 @@
+﻿using System.Collections;
+
+namespace ArrayLists.Tests.ArrayListsTestsSources
+{
+    public class AddListToEndNegativeTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+
+            ArrayList list = new ArrayList(new int[] { });
+            ArrayList actuallist = new ArrayList(new int[] { 1, 2, 2, 2, 5 });
+            yield return new object[] { list, actuallist };
+            
+
+        }
+    }
+}
