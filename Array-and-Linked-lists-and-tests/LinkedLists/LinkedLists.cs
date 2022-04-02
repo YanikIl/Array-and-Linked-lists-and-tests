@@ -17,7 +17,13 @@ namespace LinkedLists
         {
             get
             {
+                if (index < 0 || index >= Length)
+                {
+                    throw new IndexOutOfRangeException("Index out of range");
+                }
+
                 Node crnt = _root;
+
                 for (int i = 1; i <= index; i++)
                 {
                     crnt = crnt.Next;
@@ -28,7 +34,19 @@ namespace LinkedLists
 
             set
             {
+                if (index < 0 || index >= Length)
+                {
+                    throw new IndexOutOfRangeException();
+                }
 
+                Node crnt = _root;
+
+                for (int i = 1; i <= index; i++)
+                {
+                    crnt = crnt.Next;
+                }
+
+                crnt.Value = value;
             }
         }
 
@@ -58,7 +76,6 @@ namespace LinkedLists
         public LinkedList()
         {
             _root = null;
-
             _tail = null;
         }
         public LinkedList(int value)
@@ -76,11 +93,13 @@ namespace LinkedLists
             else
             {
                 _root = new Node(values[0]);
-                _tail = _root;
-
+                Node crnt = _root;
+                _tail = crnt;
                 for (int i = 1; i < values.Length; i++)
                 {
-                    Add(values[i]);
+                    crnt.Next = new Node(values[i]);
+                    crnt = crnt.Next;
+                    _tail = crnt;
                 }
             }
         }
@@ -116,15 +135,6 @@ namespace LinkedLists
             }
             else
             {
-                //Node crnt = _root;
-
-                //while (crnt.Next != null)
-                //{
-                //    crnt = crnt.Next;
-                //}
-
-                //crnt.Next = new Node(value);
-
                 _tail.Next = new Node(value);
                 _tail = _tail.Next;
             }
@@ -134,22 +144,98 @@ namespace LinkedLists
         #region 2. добавление значения в начало
         public void AddToStart(int value)
         {
-            
+            if (_root is null)
+            {
+                _root = new Node(value);
+                _tail = _root;
+            }
+            else
+            {
+                Node crnt = _root;
+                _root = new Node(value);
+                _root.Next = crnt;
+            }
         }
         #endregion
 
         #region 3. добавление значения по индексу
+        public void AddByIndex(int index, int value)
+        {
+            if (index >= Length || index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (index > 0)
+            {
+
+                Node tmp = _root;
+
+                for (int i = 0; i < index - 1; i++)
+                {
+
+                    tmp = tmp.Next;
+
+                }
+                Node crnt = new Node(value);
+                crnt.Next = tmp.Next;
+                tmp.Next = crnt;
+            }
+
+            else
+            {
+                AddToStart(value);
+            }
+        }
         #endregion
 
         #region 4. удаление из конца одного элемента
+        public void DeleteLast()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("Nothing to delete");
+            }
+
+            if (Length == 1)
+            {
+                _root = null;
+                _tail = null;
+            }
+
+            if (Length > 1)
+            {
+
+                Node crnt = _root;
+                for (int i = 1; i < Length - 1; i++)
+                {
+                    crnt = crnt.Next;
+                }
+
+                crnt.Next = null;
+
+            }
+        }
         #endregion
 
         #region 5. удаление из начала одного элемента
+        public void DeleteFirst()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("Nothing to delete");
+            }
+            _root = _root.Next;
+        }
         #endregion
 
         #region 6. удаление по индексу одного элемента
         public void DeleteByIndex(int index)
         {
+            if (Length == 0)
+            {
+                throw new Exception("Nothing to delete");
+            }
             if (index < 0 || index > Length - 1)
             {
                 throw new IndexOutOfRangeException();
@@ -171,12 +257,92 @@ namespace LinkedLists
         #endregion
 
         #region 7. удаление из конца N элементов
+        public void DeleteLastNNumbers(int n)
+        {
+            if (n > Length)
+            {
+                throw new Exception("N more Length");
+            }
+
+            if (Length == n)
+            {
+                _root = null;
+            }
+            
+            if(n < Length)
+            {
+                Node crnt = _root;
+                for (int i = 1; i < Length - n; i++)
+                {
+                    crnt = crnt.Next;
+                }
+                crnt.Next = null;
+
+            }
+        }
         #endregion
 
         #region 8. удаление из начала N элементов
+        public void DeleteFirstNNumbers(int n)
+        {
+            if (n > Length)
+            {
+                throw new Exception("N more Length");
+            }
+
+            if (Length == n)
+            {
+                _root = null;
+            }
+
+            if (n < Length)
+            {
+
+                Node crnt = _root;
+
+                for (int i = Length - n; i < Length; i++)
+                {
+
+                    crnt = crnt.Next;
+                }
+                _root = crnt;
+
+            }
+        }
         #endregion
 
         #region 9. удаление по индексу N элементов
+        public void DeleteByIndexNNumbers(int index, int n)
+        {
+            if (n > Length)
+            {
+                throw new Exception("N more Length");
+            }
+
+            else if (index < 0 || index > Length || Length - n < index)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (index > 0)
+            {
+                Node crnt = _root;
+
+                for (int i = 1; i < index; i++)
+                {
+                    crnt = crnt.Next;
+                }
+                for (int j = 0; j < n; j++)
+                {
+                    crnt.Next = crnt.Next.Next;
+                }
+
+            }
+            else if (index == 0)
+            {
+                DeleteFirstNNumbers(n);
+            }
+        }
         #endregion
 
         #region 10. вернуть длину (уже есть)
