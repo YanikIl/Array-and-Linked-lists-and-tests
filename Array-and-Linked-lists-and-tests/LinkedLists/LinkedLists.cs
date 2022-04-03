@@ -104,29 +104,10 @@ namespace LinkedLists
             }
         }
         #endregion
-
-        #region сдвиг влево
-        private void LeftShift()
-        {
-            for (int i = 1; i <= Length - 1; ++i)
-            {
-
-            }
-        }
-        #endregion
-
-        #region сдвиг вправо
-        private void RightShift()
-        {
-            for (int i = Length - 1; i >= 0; --i)
-            {
-                _tail.Next = 
-            }
-        }
-        #endregion
+ 
 
         #region 1. добавление значения в конец
-        public void Add(int value)
+        public void AddToEnd(int value)
         {
             if (_root == null)
             {
@@ -236,7 +217,7 @@ namespace LinkedLists
             {
                 throw new Exception("Nothing to delete");
             }
-            if (index < 0 || index > Length - 1)
+            if (index < 0 || index >= Length )
             {
                 throw new IndexOutOfRangeException();
             }
@@ -259,9 +240,9 @@ namespace LinkedLists
         #region 7. удаление из конца N элементов
         public void DeleteLastNNumbers(int n)
         {
-            if (n > Length)
+            if (n > Length || n < 0)
             {
-                throw new Exception("N more Length");
+                throw new ArgumentOutOfRangeException("N more Length");
             }
 
             if (Length == n)
@@ -285,9 +266,9 @@ namespace LinkedLists
         #region 8. удаление из начала N элементов
         public void DeleteFirstNNumbers(int n)
         {
-            if (n > Length)
+            if (n > Length || n < 0)
             {
-                throw new Exception("N more Length");
+                throw new ArgumentOutOfRangeException("N more Length");
             }
 
             if (Length == n)
@@ -314,12 +295,7 @@ namespace LinkedLists
         #region 9. удаление по индексу N элементов
         public void DeleteByIndexNNumbers(int index, int n)
         {
-            if (n > Length)
-            {
-                throw new Exception("N more Length");
-            }
-
-            else if (index < 0 || index > Length || Length - n < index)
+            if (index < 0 || index > Length || Length - n < index)
             {
                 throw new IndexOutOfRangeException();
             }
@@ -352,7 +328,6 @@ namespace LinkedLists
         }
         #endregion
 
-
         #region 11. доступ по индексу 
         private Node GetNodeByIndex(int index)
         {
@@ -366,8 +341,177 @@ namespace LinkedLists
         }
         #endregion
 
+        #region 12. первый индекс по значению
+        public int GetFirstIndexByValue(int value)
+        {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
+            int firstIndex = -1;
+            Node crnt = _root;
+
+            for (int i = 0; i < Length; i++)
+            {
+                if (crnt.Value == value)
+                {
+                    firstIndex = i;
+                    break;
+                }
+
+                crnt = crnt.Next;
+            }
+
+            return firstIndex;
+        }
+        #endregion
+
+        #region 13. изменение по индексу
+        public void ChangeValueByIndex(int index, int value)
+        {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+            if (index < 0 || index >= Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            Node crnt = GetNodeByIndex(index);
+            crnt.Value = value;
+        }
+        #endregion
+
+        #region 14. реверс (123 -> 321)
+        public void Reverse()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
+            Node crnt = _root;
+            Node tmp;
+
+            while (crnt.Next != null)
+            {
+                tmp = crnt.Next;
+                crnt.Next = tmp.Next;
+                tmp.Next = _root;
+                _root = tmp;
+            }
+            _tail = crnt;
+        }
+        #endregion
+
+        #region 15. поиск значения максимального элемента
+        public int GetMax()
+        {
+            if (Length == null)
+            {
+                throw new NullReferenceException("List is empty");
+            }
+
+            Node crnt = _root;
+            int max = crnt.Value;
+
+            while (crnt != null)
+            {
+                if (crnt.Value > max)
+                {
+                    max = crnt.Value;
+                }
+                crnt = crnt.Next;
+            }
+
+            return max;
+        }
+        #endregion
+
+        #region 16. поиск значения минимального элемента
+        public int GetMin()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
+            Node crnt = _root;
+            int min = crnt.Value;
+
+            while (crnt != null)
+            {
+                if (crnt.Value < min)
+                {
+                    min = crnt.Value;
+                }
+                crnt = crnt.Next;
+            }
+
+            return min;
+        }
+        #endregion
+
+        #region 17. поиск индекса максимального элемента
+        public int GetIndexByMax()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
+            Node crnt = _root;
+            int max = crnt.Value;
+            int index = 0;
+            int indexOfMax = 0;
+
+            while (crnt != null)
+            {
+                if (crnt.Value > max)
+                {
+                    max = crnt.Value;
+                    indexOfMax = index;
+                }
+                index++;
+                crnt = crnt.Next;
+            }
+
+            return indexOfMax;
+        }
+        #endregion
+
+        #region 18. поиск индекса минимального элемента
+        public int GetIndexByMin()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("List is empty");
+            }
+
+            Node crnt = _root;
+            int min = crnt.Value;
+            int index = 0;
+            int indexOfMin = 0;
+
+            while (crnt != null)
+            {
+                if (crnt.Value < min)
+                {
+                    min = crnt.Value;
+                    indexOfMin = index;
+                }
+                index++;
+                crnt = crnt.Next;
+            }
+
+            return indexOfMin;
+        }
+        #endregion
+
         #region 19. сортировка по возрастанию
-        public void Sort()
+        public void SortAscending()
         {
             int l = Length;
             Node crnt;
@@ -406,7 +550,107 @@ namespace LinkedLists
         }
         #endregion
 
+        #region 20. сортировка по убыванию descending
+        public void SortDescending()
+        {
+            int l = Length;
+            Node crnt;
+            Node prev;
 
+            for (int i = l - 2; i >= 0; i--)
+            {
+                if (i == 0)
+                {
+                    crnt = _root;
+
+                    if (crnt.Next != null && crnt.Value < crnt.Next.Value)
+                    {
+                        _root = crnt.Next;
+                        crnt.Next = _root.Next;
+                        _root.Next = crnt;
+                    }
+                    prev = _root;
+                }
+                else
+                {
+                    prev = GetNodeByIndex(i - 1);
+                    crnt = prev.Next;
+                }
+
+                while (crnt.Next != null && crnt.Value < crnt.Next.Value)
+                {
+                    prev.Next = crnt.Next;
+                    crnt.Next = prev.Next.Next;
+                    prev.Next.Next = crnt;
+
+                    prev = prev.Next;
+                }
+            }
+
+            _tail = GetNodeByIndex(l - 1);
+        }
+        #endregion
+
+
+
+
+        //#region 21. удаление по значению первого (вернуть индекс)  
+        //public int DeleteByFirstValue(int value)
+        //{
+
+        //    return index;
+        //}
+        //#endregion
+
+        //#region 22. удаление по значению всех
+        //public int DeleteAllByValue(int value)
+        //{
+        //    if (Length == 0)
+        //    {
+        //        throw new Exception("List is empty");
+        //    }
+
+        //    return count;
+        //}
+        //#endregion
+
+        //#region 23. добавление списка в конец
+
+        //public void AddListToEnd(LinkedList list)
+        //{
+        //    if (list.Length == 0)
+        //    {
+        //        throw new Exception("List is empty");
+        //    }
+
+        //}
+        //#endregion
+
+        //#region 24. добавление списка в начало
+        //public void AddListToStart(LinkedList list)
+        //{
+        //    if (list.Length == 0)
+        //    {
+        //        throw new Exception("List is empty");
+        //    }
+
+        //}
+        //#endregion
+
+        //#region 25. добавление списка по индексу
+        //public void AddListByIndex(int index, LinkedList list)
+        //{
+        //    if (list.Length == 0)
+        //    {
+        //        throw new Exception("List is empty");
+        //    }
+        //    if (index < 0 || index >= Length)
+        //    {
+        //        throw new ArgumentOutOfRangeException();
+        //    }
+
+        //}
+        //#endregion
 
 
         #region переопределенные методы
